@@ -3,6 +3,7 @@ const inquirer = require('inquirer')
 const cTable = require('console.table');
 const startPrompt = require('./models/startPrompt');
 const addADepartmentPrompt = require('./models/department');
+const addAnEmployeePrompt = require('./models/employee');
 
 const connection = mysql.createConnection(
     {
@@ -69,6 +70,46 @@ const addADepartment = () => {
             });
         });
 }
+
+const addAnEmployee = () => {
+    const managerId = `
+    SELECT employee.id, CONCAT(employee.first_name, ' ', employee.last_name)
+    AS name, departments.name AS department
+    FROM employee
+    JOIN role ON role.id = employee.role_id
+    JOIN departments ON departments.id = role.department_id
+    WHERE employee.manager_id IS null
+    `;
+
+    const roleId = `
+    SELECT role.id, role.title FROM role
+    `;
+
+    db.query(roleId, (err, result) => {
+        if (err) throw err;
+
+        console.table('\n', result);
+    })
+    db.query(managerId, (err, result) => {
+        if (err) throw err;
+        console.table('\n', result);
+    })
+    inquirer.prompt(addAnEmployeePrompt)
+        .then(answers => {
+            const params = [answers.firstName, answers.lastName, answers.roldId, answers.managerId];
+            const addEmployees = `
+            INSERT INTO employee (first_name, last_name, role_id, manager_id)
+            VALUES (?,?,?,?)
+            `;
+
+            db.query(addEmployees, params, (err, result) => {
+                if (err) throw err;
+                console.log('You have successfully added and employe!');
+                start();
+            });
+        });
+}
+
 
 
 

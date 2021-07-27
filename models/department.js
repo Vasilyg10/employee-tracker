@@ -5,9 +5,9 @@ const addADepartmentPrompt = [{
     validate: name => {
         if (name) {
             return true;
-        } else {
-            console.log('You have to enter a name!');
         }
+        console.log('You have to enter a department name!');
+        return false;
     }
 }]
 

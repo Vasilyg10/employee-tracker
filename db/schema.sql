@@ -25,7 +25,7 @@ CREATE TABLE role (
         REFERENCES departments(id)
 );
 
-CREATE TABLE department (
+CREATE TABLE departments (
     id INTEGER AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(30)
 );

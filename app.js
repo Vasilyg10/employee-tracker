@@ -1,8 +1,8 @@
 const mysql = require('mysql2');
 const inquirer = require('inquirer')
 const cTable = require('console.table');
-const startPrompt = require('./lib/startPrompt');
-const addADepartmentPrompt = require('./lib/department');
+const startPrompt = require('./models/startPrompt');
+const addADepartmentPrompt = require('./models/department');
 
 const connection = mysql.createConnection(
     {

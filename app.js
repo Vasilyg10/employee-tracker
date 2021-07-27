@@ -52,4 +52,22 @@ const viewAllEmployees = () => {
     });
 }
 
+
+const start = () => {
+    inquirer.prompt(startPrompt)
+        .then(answer => {
+            switch (answer.startPrompt) {
+                case 'view all departments':
+                    viewAllDepartments();
+                    break;
+                case 'view all roles':
+                    viewAllRoles();
+                    break;
+                case 'view all employees':
+                    viewAllEmployees();
+                    break;
+            }
+        })
+}
+
 start();

@@ -2,6 +2,7 @@ const mysql = require('mysql2');
 const inquirer = require('inquirer')
 const cTable = require('console.table');
 const startPrompt = require('./lib/startPrompt');
+const addADepartmentPrompt = require('./lib/department');
 
 const connection = mysql.createConnection(
     {
@@ -51,6 +52,24 @@ const viewAllEmployees = () => {
         start();
     });
 }
+
+const addADepartment = () => {
+    inquirer.prompt(addADepartmentPrompt)
+        .then(answer => {
+            const params = answer.departmentName;
+            const addDepartments = `
+            INSERT INTO departments (name)
+            VALUES (?)
+            `;
+
+            db.query(addDepartments, params, (err, result) => {
+                if (err) throw err;
+                console.log('You have successfuly added a Department!');
+                start();
+            });
+        });
+}
+
 
 
 const start = () => {

@@ -6,7 +6,7 @@ const addADepartmentPrompt = require('./models/department');
 const addAnEmployeePrompt = require('./models/employee');
 const addARolePrompt = require('./models/role');
 
-const connection = mysql.createConnection(
+const db = mysql.createConnection(
     {
         host: 'localhost',
         user: 'root',
@@ -148,8 +148,17 @@ const start = () => {
                 case 'view all employees':
                     viewAllEmployees();
                     break;
+                case 'add a department':
+                    addADepartment();
+                    break;
+                case 'add an employee':
+                    addAnEmployee();
+                    break;
+                case 'add a role':
+                    addARole();
+                    break;
             }
-        })
+        });
 }
 
 start();

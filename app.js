@@ -4,6 +4,7 @@ const cTable = require('console.table');
 const startPrompt = require('./models/startPrompt');
 const addADepartmentPrompt = require('./models/department');
 const addAnEmployeePrompt = require('./models/employee');
+const addARolePrompt = require('./models/role');
 
 const connection = mysql.createConnection(
     {
@@ -110,8 +111,29 @@ const addAnEmployee = () => {
         });
 }
 
+const addARole = () => {
+    const addRole = `
+    SELECT * FROM departments
+    `;
 
-
+    db.query(addRole, (err, result) => {
+        if (err) throw err;
+        console.table('\n', result);
+    })
+    inquirer.prompt(addARolePrompt)
+        .then(answers => {
+            const params = [answers.roleTitle, answers.salary, answers.departmentId];
+            const addRole = `
+            INSERT INTO role (title, salary, department_id)
+            VALUES (?, ?, ?)
+            `;
+            db.query(addRole, params, (err, result) => {
+                if (err) throw err;
+                console.log('You have successfully added a Role!');
+                start();
+            });
+        });
+}
 
 const start = () => {
     inquirer.prompt(startPrompt)

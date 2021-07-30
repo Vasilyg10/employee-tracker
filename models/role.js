@@ -1,7 +1,7 @@
 const addARolePrompt = [
     {
         type: 'input',
-        name: 'roleTitle',
+        name: 'roleTitleInput',
         message: "What is the role's title you are adding?",
         validate: roleTitle => {
             if (roleTitle) {
@@ -16,7 +16,7 @@ const addARolePrompt = [
         name: 'salaryInput',
         message: "What is the role's salary?",
         validate: salary => {
-            if (Number.isInteger(parseInt(salar))) {
+            if (Number.isInteger(parseInt(salary))) {
                 return true;
             }
             console.log('Salary has to be a number!');

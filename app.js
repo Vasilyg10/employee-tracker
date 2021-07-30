@@ -122,7 +122,7 @@ const addARole = () => {
     })
     inquirer.prompt(addARolePrompt)
         .then(answers => {
-            const params = [answers.roleTitle, answers.salary, answers.departmentId];
+            const params = [answers.roleTitleInput, answers.salaryInput, answers.departmentId];
             const addRole = `
             INSERT INTO role (title, salary, department_id)
             VALUES (?, ?, ?)

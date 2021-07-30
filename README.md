@@ -17,7 +17,7 @@
   You will need to install MySQL2, Inquirer, and the console.table packages. You can do this by typing the following in the command line 'npm i mysql2 inquirer console.table'.
 
   ## Usage
-  Please view the following video on how to use this project: https://drive.google.com/file/d/1R6O-6bgxHIOsjnEIXtfseHxsRIzzikzo/view
+  Please view the following video on how to use this project: 
 
   ## License
   MIT
